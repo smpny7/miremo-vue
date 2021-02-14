@@ -1,24 +1,14 @@
 <template>
-    <div class="container mx-auto">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Googleアカウントでログイン</h2>
-                <p>{{ user }}</p>
-                <div class="text-center mt-2"><img @click="googleLogin" class="cursor-pointer mx-auto w-52"
-                                       src="../assets/img/btn-google-signin.png" alt="GoogleLogin"></div>
-                <div class="mt-2">
-                    <p>{{ errorMessage }}</p>
-                </div>
-            </div>
+    <div class="bg-secondary fixed flex h-full items-center justify-center w-full">
+        <div class="text-center">
+            <img class="mx-auto" src="../assets/img/logo.svg" alt="Logo">
+            <h1 class="font-kavoon mt-4 text-4xl text-primary">miremo</h1>
+            <div class="mt-20"><img @click="googleLogin" class="cursor-pointer mx-auto w-56"
+                                   src="../assets/img/btn-google-signin.svg" alt="GoogleLogin"></div>
+            <p class="mt-7 text-red-500">{{ errorMessage }}</p>
         </div>
     </div>
 </template>
-
-<style>
-.mt-2 {
-    margin-top: 2px;
-}
-</style>
 
 <script>
 import firebase from 'firebase/app'

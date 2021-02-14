@@ -2,8 +2,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>ログイン成功</h2>
-                <div class="mt-4"><b-button block variant="primary" @click="logout">ログアウト</b-button></div>
+                <h2>ログイン成功！</h2>
+                <div class="mt-4"><button @click="logout">ログアウト</button></div>
             </div>
         </div>
     </div>
