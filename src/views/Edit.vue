@@ -4,7 +4,7 @@
             <h1 class="font-semibold mx-auto ml-1 text-lg text-white tracking-widest w-105">サーバーを追加</h1>
 
             <div
-                class="bg-primaryContainer flex h-24 items-center mt-4 mx-auto rounded w-105 transition duration-700 ease-in-out transform hover:scale-101">
+                class="bg-primaryContainer flex h-24 items-center mt-4 mx-auto rounded w-105">
                 <div class="relative">
                     <img class="flex-none h-16 ml-6 rounded w-16" src="../assets/img/default-server-icon.svg"
                          alt="ServerIcon">
@@ -42,12 +42,12 @@
 
             <div class="grid grid-cols-2 gap-6 mt-14 mx-auto w-105">
                 <div @click="register" v-bind:class="[isActive ? 'bg-primary cursor-pointer' : 'bg-blue-200 cursor-not-allowed']"
-                     class="flex h-12 items-center justify-center rounded transition duration-700 ease-in-out transform hover:scale-101">
+                     class="flex h-12 items-center justify-center rounded transition duration-500 ease-in-out transform hover:scale-101">
                     <span class="font-mplus font-semibold text-white tracking-wider">作成</span>
                 </div>
                 <router-link to="/home">
                     <div
-                        class="bg-primaryContainer cursor-pointer flex h-12 items-center justify-center rounded transition duration-700 ease-in-out transform hover:scale-101">
+                        class="bg-primaryContainer cursor-pointer flex h-12 items-center justify-center rounded transition duration-500 ease-in-out transform hover:scale-101">
                         <p class="font-mplus font-semibold text-white tracking-wider">キャンセル</p>
                     </div>
                 </router-link>
