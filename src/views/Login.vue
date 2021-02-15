@@ -11,9 +11,8 @@
 </template>
 
 <script>
-import firebase from 'firebase/app'
+import firebase from 'firebase'
 import router from '../router'
-import store from '../store/index'
 
 export default {
     name: 'Login',
@@ -23,16 +22,11 @@ export default {
             showError: false
         }
     },
-    created() {
-        if (this.$store.getters.user) router.push('/home')
-    },
     methods: {
         googleLogin: function () {
             const provider = new firebase.auth.GoogleAuthProvider()
 
-            firebase.auth().signInWithPopup(provider).then(result => {
-                console.log(result.user.displayName)
-                store.commit('login', result.user);
+            firebase.auth().signInWithPopup(provider).then(() => {
                 router.push('/home')
             }).catch(error => {
                 this.errorMessage = error.message

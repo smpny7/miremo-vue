@@ -6,9 +6,9 @@
         <div class="text-center">
             <img class="mx-auto rounded-full w-36" :src="user.photoURL" alt="Icon">
             <p class="font-notosans font-semibold mt-4 text-2xl text-white tracking-widest">{{ user.displayName }}</p>
-            <p class="font-notosans text-gray-500 tracking-wide">kit130101</p>
+            <p class="font-notosans text-gray-500 tracking-wide">{{ minecraft_id }}</p>
             <div @click="logout"
-                class="bg-red-400 cursor-pointer flex h-10 items-center justify-center mt-8 mx-auto rounded w-32 transition duration-700 ease-in-out transform hover:scale-101">
+                 class="bg-red-400 cursor-pointer flex h-10 items-center justify-center mt-8 mx-auto rounded w-32 transition duration-700 ease-in-out transform hover:scale-101">
                 <p class="font-mplus font-semibold text-sm text-white tracking-wider">ログアウト</p>
             </div>
         </div>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import firebase from 'firebase/app'
+import firebase from 'firebase'
 import router from '../router'
 import store from '../store/index'
 
@@ -24,12 +24,15 @@ export default {
     name: "Logout",
     computed: {
         user() {
-            return this.$store.getters.user;
+            return this.$store.getters.user
+        },
+        minecraft_id() {
+            return this.$store.getters.getMinecraftID
         }
     },
     methods: {
         logout() {
-            firebase.auth().signOut().then(function() {
+            firebase.auth().signOut().then(() => {
                 store.commit('logout')
                 router.push('/')
             }).catch(() => {
@@ -38,5 +41,5 @@ export default {
             })
         }
     }
-};
+}
 </script>

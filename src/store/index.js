@@ -4,6 +4,7 @@ import createPersistedState from 'vuex-persistedstate'
 export default new Vuex.Store({
     state: {
         user: {},
+        minecraft_id: null,
         status: false
     },
     mutations: {
@@ -14,6 +15,9 @@ export default new Vuex.Store({
         logout(state) {
             state.user = {}
             state.status = false
+        },
+        setMinecraftID(state, minecraft_id) {
+            state.minecraft_id = minecraft_id
         }
     },
     getters: {
@@ -22,6 +26,9 @@ export default new Vuex.Store({
         },
         isSignedIn(state) {
             return state.status
+        },
+        getMinecraftID(state) {
+            return state.minecraft_id
         }
     },
     plugins: [createPersistedState({storage: window.sessionStorage})]

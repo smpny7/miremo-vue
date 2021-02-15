@@ -1,5 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import firebase from 'firebase/app'
+import {createRouter, createWebHistory} from 'vue-router'
+import firebase from 'firebase'
+import store from '../store/index'
 import Success from '../views/Success.vue'
 
 const routes = [
@@ -38,20 +39,38 @@ const router = createRouter({
 
 // 未認証の場合はログイン画面へ
 router.beforeResolve((to, from, next) => {
-    console.log(to)
-    if (to.path === '/') {
-        next()
-    } else {
-        firebase.auth().onAuthStateChanged(user => {
+    firebase.auth().onAuthStateChanged(user => {
+        if (to.path === '/') {
             if (user) {
-                console.log('認証中')
+                store.commit('login', user);
+                next({path: '/home'})
+            } else {
+                store.commit('login', {});
+                next()
+            }
+        } else {
+            if (user) {
+                store.commit('login', user);
                 next()
             } else {
-                console.log('未認証')
+                store.commit('login', {});
                 next({path: '/'})
             }
+        }
+    })
+
+    firebase.firestore().collection("users").doc(store.getters.user.uid).get()
+        .then((data) => {
+            if(data.exists) {
+                console.log(data.get('minecraft_id'))
+                store.commit('setMinecraftID', data.get('minecraft_id'));
+            } else {
+                console.log('MinecraftIDが登録されていません')
+            }
         })
-    }
+        .catch((error) => {
+            console.log(error);
+        });
 })
 
 
