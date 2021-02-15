@@ -4,6 +4,7 @@ import router from './router'
 import './assets/css/tailwind.css'
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import store from './store'
 
 const firebaseConfig = {
     apiKey: "AIzaSyDQvRnwTNbcFp2URONcYqVBe-YgHm8JjYg",
@@ -16,4 +17,4 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig)
 
-createApp(App).use(router).mount('#app')
+createApp(App).use(router).use(store).mount('#app')

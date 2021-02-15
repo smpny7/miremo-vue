@@ -13,6 +13,7 @@
 <script>
 import firebase from 'firebase/app'
 import router from '../router'
+import store from '../store/index'
 
 export default {
     name: 'login',
@@ -30,6 +31,9 @@ export default {
             firebase.auth().signInWithPopup(provider).then(result => {
                 console.log(result.user.displayName)
                 this.user = result.user.displayName
+                // result.user = result.user ? result.user : {};
+                store.commit('onAuthStateChanged', result.user);
+                store.commit('onUserStatusChanged', result.user.uid ? true : false);
                 router.push('/success')
             }).catch(error => {
                 console.log(error)
