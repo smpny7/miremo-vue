@@ -27,7 +27,7 @@ export default {
         if (this.$store.getters.user) router.push('/success')
     },
     methods: {
-        googleLogin() {
+        googleLogin: function () {
             const provider = new firebase.auth.GoogleAuthProvider()
 
             firebase.auth().signInWithPopup(provider).then(result => {

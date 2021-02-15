@@ -4,9 +4,9 @@
     </div>
     <div v-else>
         <div id="nav">
-            <router-link to="/">Home</router-link>
+            <router-link to="/">Login</router-link>
             |
-            <router-link to="/about">About</router-link>
+            <router-link to="/home">Home</router-link>
             |
             <router-link to="/success">Success</router-link>
         </div>
@@ -20,7 +20,7 @@
 export default {
     computed: {
         isLoginScreen() {
-            return this.$route.path === '/';
+            return (this.$route.path === '/' || this.$route.path === '/home');
         }
     }
 }
