@@ -1,7 +1,9 @@
 <template>
     <div>
         <div class="bg-secondary fixed h-full justify-center w-full">
-            <img class="cursor-pointer fixed right-4 top-4 w-8" src="../assets/img/setting.svg" alt="Setting">
+            <router-link to="/logout">
+                <img class="cursor-pointer fixed right-4 top-4 w-8" src="../assets/img/setting.svg" alt="Setting">
+            </router-link>
         </div>
 
         <div class="relative top-56 text-center">

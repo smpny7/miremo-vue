@@ -16,7 +16,7 @@ import router from '../router'
 import store from '../store/index'
 
 export default {
-    name: 'login',
+    name: 'Login',
     data() {
         return {
             errorMessage: '',
@@ -24,7 +24,7 @@ export default {
         }
     },
     created() {
-        if (this.$store.getters.user) router.push('/success')
+        if (this.$store.getters.user) router.push('/home')
     },
     methods: {
         googleLogin: function () {
@@ -33,7 +33,7 @@ export default {
             firebase.auth().signInWithPopup(provider).then(result => {
                 console.log(result.user.displayName)
                 store.commit('login', result.user);
-                router.push('/success')
+                router.push('/home')
             }).catch(error => {
                 this.errorMessage = error.message
                 this.showError = true

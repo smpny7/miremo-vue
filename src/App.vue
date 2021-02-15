@@ -20,7 +20,7 @@
 export default {
     computed: {
         isLoginScreen() {
-            return (this.$route.path === '/' || this.$route.path === '/home');
+            return (this.$route.path === '/' || this.$route.path === '/logout' || this.$route.path === '/home');
         }
     }
 }
