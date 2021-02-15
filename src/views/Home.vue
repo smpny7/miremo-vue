@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="bg-secondary fixed h-full justify-center w-full">
+        <div class="bg-secondary fixed h-full justify-center top-0 w-full">
             <router-link to="/logout">
                 <img class="cursor-pointer fixed right-4 top-4 w-8" src="../assets/img/setting.svg" alt="Setting">
             </router-link>
@@ -19,18 +19,20 @@
                 <div class="absolute bg-online -bottom-0.5 h-4 -right-0.5 rounded-full w-4"></div>
             </div>
             <div class="flex-grow ml-5">
-                <p class="font-mplus font-semibold text-lg text-white tracking-wider">{{ server.title }}</p>
+                <p class="font-mplus font-semibold text-lg text-white tracking-wider">{{ server.displayName }}</p>
                 <p class="font-mplus mt-2 text-gray-300 text-sm">オンライン : 2 / 12</p>
             </div>
             <img class="flex-none mr-2 w-9" src="../assets/img/access.svg" alt="Access">
         </div>
 
-        <div class="grid grid-cols-2 gap-6 mt-6 mx-auto relative top-64 w-105">
-            <div
-                class="bg-primary cursor-pointer flex h-12 items-center justify-center rounded text-ce transition duration-700 ease-in-out transform hover:scale-101">
-                <span class="font-mplus font-semibold text-white tracking-wider">サーバーを追加</span>
-            </div>
-            <div
+        <div class="grid gap-6 mt-6 mx-auto relative top-64 w-105" v-bind:class="[servers.length > 0 ? 'grid-cols-2' : 'grid-cols-1']">
+            <router-link to="/create">
+                <div
+                    class="bg-primary cursor-pointer flex h-12 items-center justify-center rounded transition duration-700 ease-in-out transform hover:scale-101">
+                    <span class="font-mplus font-semibold text-white tracking-wider">サーバーを追加</span>
+                </div>
+            </router-link>
+            <div v-if="servers.length > 0"
                 class="bg-primaryContainer cursor-pointer flex h-12 items-center justify-center rounded transition duration-700 ease-in-out transform hover:scale-101">
                 <p class="font-mplus font-semibold text-white tracking-wider">編集</p>
             </div>
@@ -53,6 +55,7 @@ export default {
             .then((result) => {
                 result.forEach((data) => {
                     this.servers.push(data.data())
+                    console.log(JSON.stringify(data.data()))
                 })
             })
             .catch((error) => {
