@@ -7,11 +7,13 @@ export default new Vuex.Store({
         status: false
     },
     mutations: {
-        onAuthStateChanged(state, user) {
-            state.user = user //firebaseが返したユーザー情報
+        login(state, user) {
+            state.user = user
+            state.status = true
         },
-        onUserStatusChanged(state, status) {
-            state.status = status //ログインしてるかどうか true or false
+        logout(state) {
+            state.user = {}
+            state.status = false
         }
     },
     getters: {

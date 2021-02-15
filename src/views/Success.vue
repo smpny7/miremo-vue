@@ -9,24 +9,20 @@
     </div>
 </template>
 
-<style>
-.mt-4 {
-    margin-top: 4px;
-}
-</style>
-
 <script>
 import firebase from 'firebase/app'
 import router from '../router'
+import store from '../store/index'
 
 export default {
     name: 'success',
     methods: {
         logout() {
             firebase.auth().signOut().then(function() {
+                store.commit('logout')
                 router.push('/')
-            }).catch(error => {
-                console.log(error.message)
+            }).catch(() => {
+                store.commit('logout')
                 router.push('/')
             })
         }

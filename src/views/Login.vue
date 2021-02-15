@@ -4,7 +4,7 @@
             <img class="mx-auto" src="../assets/img/logo.svg" alt="Logo">
             <h1 class="font-kavoon mt-4 text-4xl text-primary">miremo</h1>
             <div class="mt-20"><img @click="googleLogin" class="cursor-pointer mx-auto w-56"
-                                   src="../assets/img/btn-google-signin.svg" alt="GoogleLogin"></div>
+                                    src="../assets/img/btn-google-signin.svg" alt="GoogleLogin"></div>
             <p class="mt-7 text-red-500">{{ errorMessage }}</p>
         </div>
     </div>
@@ -19,10 +19,12 @@ export default {
     name: 'login',
     data() {
         return {
-            user: null,
             errorMessage: '',
             showError: false
         }
+    },
+    created() {
+        if (this.$store.getters.user) router.push('/success')
     },
     methods: {
         googleLogin() {
@@ -30,13 +32,9 @@ export default {
 
             firebase.auth().signInWithPopup(provider).then(result => {
                 console.log(result.user.displayName)
-                this.user = result.user.displayName
-                // result.user = result.user ? result.user : {};
-                store.commit('onAuthStateChanged', result.user);
-                store.commit('onUserStatusChanged', result.user.uid ? true : false);
+                store.commit('login', result.user);
                 router.push('/success')
             }).catch(error => {
-                console.log(error)
                 this.errorMessage = error.message
                 this.showError = true
             })
