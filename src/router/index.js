@@ -47,18 +47,18 @@ router.beforeResolve((to, from, next) => {
     firebase.auth().onAuthStateChanged(user => {
         if (to.path === '/') {
             if (user) {
-                store.commit('login', user);
+                store.commit('login', user)
                 next({path: '/home'})
             } else {
-                store.commit('login', {});
+                store.commit('login', {})
                 next()
             }
         } else {
             if (user) {
-                store.commit('login', user);
+                store.commit('login', user)
                 next()
             } else {
-                store.commit('login', {});
+                store.commit('login', {})
                 next({path: '/'})
             }
         }
@@ -68,14 +68,15 @@ router.beforeResolve((to, from, next) => {
         .then((data) => {
             if(data.exists) {
                 console.log(data.get('minecraft_id'))
-                store.commit('setMinecraftID', data.get('minecraft_id'));
+                store.commit('setMinecraftID', data.get('minecraft_id'))
             } else {
                 console.log('MinecraftIDが登録されていません')
+                store.commit('setMinecraftID', '')
             }
         })
         .catch((error) => {
-            console.log(error);
-        });
+            console.log(error)
+        })
 })
 
 
